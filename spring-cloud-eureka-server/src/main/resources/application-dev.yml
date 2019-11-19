@@ -1,0 +1,25 @@
+#定义环境引用的配置文件
+server:
+  port: 8089
+#Eureka Config
+eureka:
+  environment: dev
+  server:
+    #关闭服务保护
+    enable-self-preservation: false
+  client:
+    service-url:
+      defaultZone: http://localhost:${server.port}/eureka/
+    # 是否从其他的服务中心同步服务列表
+    fetch-registry: false
+    # 是否把自己作为服务注册到其他服务注册中心
+    register-with-eureka: false
+    # 间隔多久去拉取服务注册信息
+    registry-fetch-interval-seconds: 5
+    ## 主动轮询淘汰失效节点
+    eviction-interval-timer-in-ms: 10
+
+logging:
+  path: /data/logs/spring-cloud-eureka-server
+
+

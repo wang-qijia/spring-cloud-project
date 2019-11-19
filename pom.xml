@@ -10,7 +10,7 @@
     <description>spring-cloud-project</description>
 
     <modules>
-        <module>spring-cloud-eureka</module>
+        <module>spring-cloud-eureka-server</module>
     </modules>
 
     <properties>
