@@ -1,8 +1,34 @@
+# 公共配置信息
+server:
+  port: 8090
 spring:
   application:
     name: spring-cloud-config-server
   profiles:
-    active: dev
+    active: native # 读取本地文件
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/spring-cloud-config-repository/{application}
+eureka:
+  instance:
+    #心跳时间间隔
+    lease-renewal-interval-in-seconds: 10
+    #无心跳多久后,该服务失效
+    lease-expiration-duration-in-seconds: 30
+    appname: spring-cloud-config-server
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: false
+    registry-fetch-interval-seconds: 5
 
-server:
-  port: 8090
+
+
+info:
+  app:
+    name: spring-cloud-config-server
+    version: 1.0.0
+
