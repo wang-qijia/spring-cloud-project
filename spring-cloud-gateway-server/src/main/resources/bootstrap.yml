@@ -1,0 +1,79 @@
+# 提前加载上下文配置环境
+server:
+  port: 8092
+# 配置文件信息通过注册中心的配置中心统一获取
+spring:
+  profiles:
+    active: dev
+  application:
+    name: spring-cloud-gateway-server
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: spring-cloud-config-server
+      fail-fast: true # 拉取配置失败，直接项目启动失败
+    gateway:
+      default-filters: # 全局熔断拦截
+        - name: Hystrix
+          args:
+            name: fallback
+            fallbackUri: forward:/fallback
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: spring-cloud-client-server
+          uri: lb://spring-cloud-client-server
+          predicates:
+            - Path=/spring-cloud-client-server/**
+          filters:
+            - StripPrefix=1
+            - name: Retry
+              args:
+                retries: 3
+
+# 配置注册中心
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+  instance:
+    #心跳时间间隔
+    lease-renewal-interval-in-seconds: 10
+    #无心跳多久后,该服务失效
+    lease-expiration-duration-in-seconds: 30
+    appname: spring-cloud-gateway-server
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+
+# 请求处理时长大于2s直接熔断
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2000
+
+# WebEndpointProperties 配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,env
+info:
+  app:
+    name: spring-cloud-gateway-server
+    version: 1.0.0
+
+
+
+# dev 环境
+---
+spring:
+  profiles: dev
+eureka:
+  client:
+    registry-fetch-interval-seconds: 10
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8089/eureka/
