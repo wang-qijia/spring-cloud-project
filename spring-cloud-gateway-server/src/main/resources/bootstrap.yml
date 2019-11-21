@@ -14,10 +14,13 @@ spring:
         service-id: spring-cloud-config-server
       fail-fast: true # 拉取配置失败，直接项目启动失败
     gateway:
+      httpclient:
+        connect-timeout: 2000 # 连接创建时间
+        response-timeout: 2000ms # 读取时间 单位:Duration
       default-filters: # 全局熔断拦截
         - name: Hystrix
           args:
-            name: fallback
+            name: fallbackcmd
             fallbackUri: forward:/fallback
       discovery:
         locator:
@@ -32,6 +35,12 @@ spring:
             - name: Retry
               args:
                 retries: 3
+                series:
+                  - SERVER_ERROR
+                exceptions:
+                  - org.springframework.cloud.gateway.support.TimeoutException # 超时时重试
+
+
 
 # 配置注册中心
 eureka:
@@ -46,14 +55,14 @@ eureka:
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     prefer-ip-address: true
 
-# 请求处理时长大于2s直接熔断
+# 请求处理时长大于15s直接熔断
 hystrix:
   command:
     default:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 2000
+            timeoutInMilliseconds: 15000 #重试期间大于该超时时间会熔断
 
 # WebEndpointProperties 配置
 management:

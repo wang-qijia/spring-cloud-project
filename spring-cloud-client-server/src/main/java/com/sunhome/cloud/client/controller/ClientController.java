@@ -19,12 +19,13 @@ public class ClientController {
 
     @GetMapping("pull")
     public ClientProperties pull() {
-        System.out.println("test 重试");
+        System.out.println("test 重试 begin");
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(10);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("test 重试 after");
 
         if (true) {
             throw new RuntimeException();
