@@ -3,16 +3,16 @@ package com.sunhome.cloud.gateway.filter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.GatewayFilterFactory;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 @Component
-public class SpringGatewayFilterFactory implements
-        GatewayFilterFactory<SpringGatewayFilterFactory.Config> {
+public class PrintGatewayFilterFactory implements
+        GatewayFilterFactory<PrintGatewayFilterFactory.Config> {
 
     private final Class<Config> configClass = Config.class;
 
@@ -24,10 +24,8 @@ public class SpringGatewayFilterFactory implements
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
-            ServerHttpRequest request = exchange.getRequest().mutate().headers(httpHeaders -> {
-
-            }).build();
-            return chain.filter(exchange.mutate().request(request).build());
+            System.out.println("print:" + config.getKey());
+            return chain.filter(exchange);
         });
     }
 

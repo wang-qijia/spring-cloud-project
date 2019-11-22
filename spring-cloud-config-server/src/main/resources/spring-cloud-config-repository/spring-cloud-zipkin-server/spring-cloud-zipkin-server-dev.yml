@@ -1,5 +1,5 @@
 #定义环境引用的配置文件
 logging:
-  path: /data/logs/spring-cloud-config-server
+  path: /data/logs/spring-cloud-zipkin-server
 
 

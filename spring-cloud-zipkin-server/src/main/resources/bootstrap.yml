@@ -1,12 +1,12 @@
 # 提前加载上下文配置环境
 server:
-  port: 8091
+  port: 8093
 # 配置文件信息通过注册中心的配置中心统一获取
 spring:
   profiles:
     active: dev
   application:
-    name: spring-cloud-client-server
+    name: spring-cloud-zipkin-server
   cloud:
     config:
       discovery:
@@ -31,26 +31,31 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: ALWAYS
+        include: info,env
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
+
+zipkin:
+  storage:
+    type: mysql
+
 info:
   app:
-    name: spring-cloud-client-server
+    name: spring-cloud-zipkin-server
     version: 1.0.0
 
 
 # dev 环境
-
 ---
 spring:
   profiles: dev
-  zipkin:
-    base-url: http://localhost:8093
-  sleuth:
-    sampler:
-      probability: 1.0
+  datasource:
+    url: jdbc:mysql://localhost:3306/zipkin-server?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    username: root
+    password:
+    driver-class-name: com.mysql.jdbc.Driver
 eureka:
   client:
     registry-fetch-interval-seconds: 10

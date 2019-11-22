@@ -15,6 +15,8 @@
         <module>spring-cloud-config-server</module>
         <module>spring-cloud-client-server</module>
         <module>spring-cloud-gateway-server</module>
+        <module>spring-cloud-zipkin-server</module>
+        <module>spring-cloud-admin-server</module>
     </modules>
 
     <properties>
@@ -26,6 +28,8 @@
         <spring-cloud.version>Finchley.RC2</spring-cloud.version>
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <spring-boot-admin-version>2.0.2</spring-boot-admin-version>
+
     </properties>
 
     <dependencyManagement>

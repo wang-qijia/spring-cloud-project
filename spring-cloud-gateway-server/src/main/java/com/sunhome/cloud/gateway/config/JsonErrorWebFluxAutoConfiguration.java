@@ -6,9 +6,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.condition.SearchStrategy;
+import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.autoconfigure.web.reactive.WebFluxAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.reactive.error.DefaultErrorWebExceptionHandler;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.reactive.error.DefaultErrorAttributes;
 import org.springframework.boot.web.reactive.error.ErrorAttributes;
@@ -17,19 +19,23 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
+import org.springframework.web.reactive.function.server.*;
 import org.springframework.web.reactive.result.view.ViewResolver;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 @ConditionalOnClass(WebFluxConfigurer.class)
 @AutoConfigureBefore(WebFluxAutoConfiguration.class)
 @EnableConfigurationProperties({ServerProperties.class, ResourceProperties.class})
-public class CustomErrorWebFluxAutoConfiguration {
+public class JsonErrorWebFluxAutoConfiguration {
 
     private final ServerProperties serverProperties;
 
@@ -41,11 +47,11 @@ public class CustomErrorWebFluxAutoConfiguration {
 
     private final ServerCodecConfigurer serverCodecConfigurer;
 
-    public CustomErrorWebFluxAutoConfiguration(ServerProperties serverProperties,
-                                               ResourceProperties resourceProperties,
-                                               ObjectProvider<List<ViewResolver>> viewResolversProvider,
-                                               ServerCodecConfigurer serverCodecConfigurer,
-                                               ApplicationContext applicationContext) {
+    public JsonErrorWebFluxAutoConfiguration(ServerProperties serverProperties,
+                                             ResourceProperties resourceProperties,
+                                             ObjectProvider<List<ViewResolver>> viewResolversProvider,
+                                             ServerCodecConfigurer serverCodecConfigurer,
+                                             ApplicationContext applicationContext) {
         this.serverProperties = serverProperties;
         this.applicationContext = applicationContext;
         this.resourceProperties = resourceProperties;
@@ -75,6 +81,43 @@ public class CustomErrorWebFluxAutoConfiguration {
     public DefaultErrorAttributes errorAttributes() {
         return new DefaultErrorAttributes(
                 this.serverProperties.getError().isIncludeException());
+    }
+
+
+    public static class JsonErrorWebExceptionHandler extends DefaultErrorWebExceptionHandler {
+
+        public JsonErrorWebExceptionHandler(ErrorAttributes errorAttributes,
+                                            ResourceProperties resourceProperties,
+                                            ErrorProperties errorProperties,
+                                            ApplicationContext applicationContext) {
+            super(errorAttributes, resourceProperties, errorProperties, applicationContext);
+        }
+
+        @Override
+        protected Map<String, Object> getErrorAttributes(ServerRequest request, boolean includeStackTrace) {
+            int code = 500;
+            Throwable error = super.getError(request);
+            if (error instanceof org.springframework.cloud.gateway.support.NotFoundException) {
+                code = 404;
+            }
+            Map<String, Object> errorAttributes = new HashMap<>(8);
+            errorAttributes.put("message", error.getMessage());
+            errorAttributes.put("code", code);
+            errorAttributes.put("method", request.methodName());
+            errorAttributes.put("path", request.path());
+            return errorAttributes;
+        }
+
+        @Override
+        protected RouterFunction<ServerResponse> getRoutingFunction(ErrorAttributes errorAttributes) {
+            return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse);
+        }
+
+        @Override
+        protected HttpStatus getHttpStatus(Map<String, Object> errorAttributes) {
+            int statusCode = (int) errorAttributes.get("code");
+            return HttpStatus.valueOf(statusCode);
+        }
     }
 
 }

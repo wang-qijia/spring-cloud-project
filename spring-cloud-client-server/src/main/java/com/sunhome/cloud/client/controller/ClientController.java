@@ -33,4 +33,10 @@ public class ClientController {
         return clientProperties;
     }
 
+    @GetMapping("push")
+    public String push() {
+        System.out.println("test 重试 begin");
+        return "push";
+    }
+
 }

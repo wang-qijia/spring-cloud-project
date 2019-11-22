@@ -4,6 +4,10 @@
 ## 配置方式
 yml声明配置,可以选择编程时配置
 
+## 技术栈
+Reactor反应式编程
+[https://juejin.im/post/5b3a22a16fb9a024db5ff13e](https://juejin.im/post/5b3a22a16fb9a024db5ff13e)
+
 ## 常见问题
 1. spring gateway 官方网站介绍的很少,详细使用时尤其用在生产上时多看源码
 2. 采用netty作为项目容器, 网关已集成ribbon框架,详细参考 GatewayLoadBalancerClientAutoConfiguration

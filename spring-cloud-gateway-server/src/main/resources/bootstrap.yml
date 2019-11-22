@@ -32,6 +32,7 @@ spring:
             - Path=/spring-cloud-client-server/**
           filters:
             - StripPrefix=1
+            - Print=success
             - name: Retry
               args:
                 retries: 3
@@ -81,6 +82,11 @@ info:
 ---
 spring:
   profiles: dev
+  zipkin:
+    base-url: http://localhost:8093
+  sleuth:
+    sampler:
+      probability: 1.0
 eureka:
   client:
     registry-fetch-interval-seconds: 10

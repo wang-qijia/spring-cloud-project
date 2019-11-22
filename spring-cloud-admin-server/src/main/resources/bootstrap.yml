@@ -1,12 +1,12 @@
 # 提前加载上下文配置环境
 server:
-  port: 8091
+  port: 8094
 # 配置文件信息通过注册中心的配置中心统一获取
 spring:
   profiles:
     active: dev
   application:
-    name: spring-cloud-client-server
+    name: spring-cloud-admin-server
   cloud:
     config:
       discovery:
@@ -22,7 +22,7 @@ eureka:
     lease-renewal-interval-in-seconds: 10
     #无心跳多久后,该服务失效
     lease-expiration-duration-in-seconds: 30
-    appname: spring-cloud-client-server
+    appname: spring-cloud-admin-server
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     prefer-ip-address: true
 
@@ -31,13 +31,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: ALWAYS
+        include: info,env
 info:
   app:
-    name: spring-cloud-client-server
+    name: spring-cloud-admin-server
     version: 1.0.0
 
 
@@ -46,11 +43,6 @@ info:
 ---
 spring:
   profiles: dev
-  zipkin:
-    base-url: http://localhost:8093
-  sleuth:
-    sampler:
-      probability: 1.0
 eureka:
   client:
     registry-fetch-interval-seconds: 10

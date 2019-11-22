@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
 @EnableConfigurationProperties(ClientProperties.class)
-@EnableDiscoveryClient
+@EnableDiscoveryClient // spring cloud Edgware 版本后可不写,个人习惯写上
 public class ClientServerBootstrap {
 
     public static void main(String[] args) {
