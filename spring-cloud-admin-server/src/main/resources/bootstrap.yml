@@ -13,6 +13,9 @@ spring:
         enabled: true
         service-id: spring-cloud-config-server
       fail-fast: true # 拉取配置失败，直接项目启动失败
+  security:
+    basic:
+      enabled:
 # 配置注册中心
 eureka:
   client:
@@ -31,18 +34,32 @@ management:
   endpoints:
     web:
       exposure:
-        include: info,env
+        include: "*"
 info:
   app:
     name: spring-cloud-admin-server
     version: 1.0.0
 
 
-# dev 环境
 
+# dev 环境
 ---
 spring:
   profiles: dev
+  boot:
+    admin: ## admin 监控配置
+      notify:
+        mail:
+          to: m15201373116@163.com  #收件人邮箱
+          from: m15201373116@163.com  #发件人邮箱
+  mail: # 邮箱信息配置
+    host: smtp.163.com
+    username: m15201373116@163.com
+    password: wang521
+#    properties:
+#      mail.smtp.auth: true
+#      mail.smtp.ssl.enable: true
+
 eureka:
   client:
     registry-fetch-interval-seconds: 10
