@@ -11,3 +11,6 @@
         <spring-cloud.version>Finchley.RC2</spring-cloud.version>
 ```
 
+
+## 搭建模型
+![spring_cloud模型](image/spring_cloud.jpg)

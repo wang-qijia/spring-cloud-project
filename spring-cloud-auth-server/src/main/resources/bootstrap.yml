@@ -1,0 +1,67 @@
+# 提前加载上下文配置环境
+server:
+  port: 8095
+# 配置文件信息通过注册中心的配置中心统一获取
+spring:
+  profiles:
+    active: dev
+  application:
+    name: spring-cloud-auth-server
+#  cloud: 该配置已更新为apollo服务
+#    config:
+#      discovery:
+#        enabled: true
+#        service-id: spring-cloud-config-server
+#      fail-fast: true # 拉取配置失败，直接项目启动失败
+# 配置注册中心
+eureka:
+  client:
+    registry-fetch-interval-seconds: 5
+  instance:
+    #心跳时间间隔
+    lease-renewal-interval-in-seconds: 10
+    #无心跳多久后,该服务失效
+    lease-expiration-duration-in-seconds: 30
+    appname: spring-cloud-auth-server
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+
+# WebEndpointProperties 配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+info:
+  app:
+    name: spring-cloud-auth-server
+    version: 1.0.0
+
+
+# dev 环境
+---
+spring:
+  profiles: dev
+  zipkin:
+    base-url: http://localhost:8093
+  sleuth:
+    sampler:
+      probability: 1.0
+eureka:
+  client:
+    registry-fetch-interval-seconds: 10
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8089/eureka/
+# apollo 配置信息
+app:
+  id: spring-cloud-auth-server
+apollo:
+  meta: http://127.0.0.1:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+

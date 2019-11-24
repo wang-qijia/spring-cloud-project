@@ -17,6 +17,7 @@
         <module>spring-cloud-gateway-server</module>
         <module>spring-cloud-zipkin-server</module>
         <module>spring-cloud-admin-server</module>
+        <module>spring-cloud-auth-server</module>
     </modules>
 
     <properties>
