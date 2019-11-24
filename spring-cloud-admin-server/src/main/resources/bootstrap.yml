@@ -55,7 +55,7 @@ spring:
   mail: # 邮箱信息配置
     host: smtp.163.com
     username: m15201373116@163.com
-    password: wang521
+    password: ####
 #    properties:
 #      mail.smtp.auth: true
 #      mail.smtp.ssl.enable: true
