@@ -1,0 +1,15 @@
+spring:
+  mail: # 邮箱信息配置
+    host: smtp.163.com
+    username: m15201373116@163.com
+    password: wang521
+  datasource: # 数据源配置
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/admin
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+
+
+

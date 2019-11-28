@@ -18,6 +18,7 @@
         <module>spring-cloud-zipkin-server</module>
         <module>spring-cloud-admin-server</module>
         <module>spring-cloud-auth-server</module>
+        <module>spring-cloud-alarm-server</module>
     </modules>
 
     <properties>

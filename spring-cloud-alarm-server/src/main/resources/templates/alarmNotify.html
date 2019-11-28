@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+
+        body {
+            font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+            color: #4f6b72;
+        }
+        a {
+            color: #c75f3e;
+        }
+
+        #mytable {
+            width: 900px;
+            padding: 0;
+            margin-left: 50px;
+        }
+
+        caption {
+            padding: 0 0 5px 0;
+            width: 700px;
+            font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+            text-align: right;
+        }
+
+        th {
+            font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+            color: #4f6b72;
+            border-right: 1px solid #C1DAD7;
+            border-bottom: 1px solid #C1DAD7;
+            border-top: 1px solid #C1DAD7;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 6px 6px 6px 12px;
+            white-space: nowrap;
+
+        }
+
+
+        td {
+            border-right: 1px solid #C1DAD7;
+            border-bottom: 1px solid #C1DAD7;
+            background: #fff;
+            font-size:11px;
+            padding: 6px 6px 6px 12px;
+            color: #4f6b72;
+            white-space: nowrap;
+        }
+    </style>
+
+</head>
+<body>
+<table  id="mytable" cellpadding="0" cellspacing="0">
+    <thead>
+        <th>告警时间</th>
+        <th>服务范围</th>
+        <th>服务名称</th>
+        <th>告警规则</th>
+        <th>告警消息</th>
+    </thead>
+
+    <tbody>
+        <tr th:each="alarm:${alarmList}" >
+            <td th:text="${alarm['startTime']}"></td>
+            <td th:text="${alarm.scope}"></td>
+            <td th:text="${alarm['name']}"></td>
+            <td th:text="${alarm['ruleName']}"></td>
+            <td th:text="${alarm['alarmMessage']}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
