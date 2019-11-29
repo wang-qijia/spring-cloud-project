@@ -1,6 +1,7 @@
 package com.sunhome.cloud.alarm.service.notify;
 
 import com.alibaba.fastjson.JSON;
+import com.sunhome.cloud.alarm.config.AlarmProperties;
 import com.sunhome.cloud.alarm.entiy.AlarmMessage;
 import com.sunhome.cloud.alarm.entiy.AlarmMessageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,12 @@ public class MailAlarmService implements AlarmService {
 
     @Autowired
     private JavaMailSender mailSender;
+
     @Autowired
     private MailContentBuilder mailContentBuilder;
+
+    @Autowired
+    private AlarmProperties alarmProperties;
 
     @Override
     public void notify(List<AlarmMessage> alarmMessages) {
@@ -35,17 +40,16 @@ public class MailAlarmService implements AlarmService {
         List<AlarmMessageDTO> alarmMessageList = new ArrayList<>();
 
         for (AlarmMessage alarmMessage : alarmMessages) {
-            toMessageStr(sb, alarmMessage);
+//            toMessageStr(sb, alarmMessage);
             toMessageDTO(alarmMessageList, alarmMessage);
         }
-
 
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setFrom("m15201373116@163.com");
-            helper.setTo("m15201373116@163.com");
-            helper.setSubject("服务告警");
+            helper.setFrom(alarmProperties.getFrom());
+            helper.setTo(alarmProperties.getTo());
+            helper.setSubject(alarmProperties.getTo());
 //            helper.setText(sb.toString());
             helper.setText(mailContentBuilder.build(alarmMessageList), true);
             mailContentBuilder.build(alarmMessageList);
@@ -61,7 +65,7 @@ public class MailAlarmService implements AlarmService {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
         AlarmMessageDTO alarmMessageDTO = new AlarmMessageDTO();
-        alarmMessageDTO.setAlarmMessage(alarmMessage.getAlarmMessage());
+        alarmMessageDTO.setAlarmMessage(Rule.get(alarmMessage.getRuleName(), alarmMessage.getAlarmMessage()));
         alarmMessageDTO.setName(alarmMessage.getName());
         alarmMessageDTO.setRuleName(alarmMessage.getRuleName());
         alarmMessageDTO.setScope(alarmMessage.getScope());

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration status="WARN" monitorInterval="60">
+
+    <Properties>
+        <property name="LOG_PATTERN" value="[%p]|%d{yyyy-MM-dd HH:mm:ss SSS}|%t|[%traceId]|%C.%M(%L)|%m%n"/>
+        <!-- 定义日志存储的路径，不要配置相对路径 -->
+        <property name="BASE_DIR" value="/data/logs"/>
+        <property name="PROJECT_NAME" value="spring-cloud-alarm-server"/>
+    </Properties>
+
+
+    <Appenders>
+        <!--这个输出控制台的配置，即System.out -->
+        <Console name="console_out_appender" target="SYSTEM_OUT">
+            <!-- 控制台只输出level及以上级别的信息(onMatch),其他的直接拒绝(onMismatch) . -->
+            <ThresholdFilter level="INFO" onMatch="ACCEPT"
+                             onMismatch="DENY"/>
+            <!-- 输出日志的格式 -->
+            <PatternLayout pattern="[%p]|%d{yyyy-MM-dd HH:mm:ss SSS}|%t|%C.%M(%L)|%m%n"/>
+        </Console>
+
+        <RollingFile name="file_out_appender" fileName="${BASE_DIR}/${PROJECT_NAME}/stdout.log"
+                     filePattern="${BASE_DIR}/${PROJECT_NAME}/stdout-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="[%p]|%d{yyyy-MM-dd HH:mm:ss SSS}|%t|%C.%M(%L)|%m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+
+    </Appenders>
+
+    <loggers>
+
+        <root level="info">
+            <appender-ref ref="console_out_appender"/>
+            <appender-ref ref="file_out_appender"/>
+        </root>
+
+    </loggers>
+</configuration>

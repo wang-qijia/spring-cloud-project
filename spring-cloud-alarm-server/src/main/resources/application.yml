@@ -6,3 +6,6 @@ spring:
     active: dev
   application:
     name: spring-cloud-alarm-server
+# 日志配置
+logging:
+  config: classpath:log4j2.xml
