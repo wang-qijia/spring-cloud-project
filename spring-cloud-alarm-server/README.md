@@ -45,10 +45,10 @@ http://127.0.0.1:8099/simulate/readTimeout
     message: The average service response event in the last 2 minutes is greater than 2 seconds
 ```
 页面告警
-![服务告警页面图片](doc/sql/image/alarm_img_one_page.jpg)
+![服务告警页面图片](doc/image/alarm_img_one_page.jpg)
 
 邮箱告警
-![服务告警邮箱图片](doc/sql/image/alarm_img_one_mail.jpg)
+![服务告警邮箱图片](doc/image/alarm_img_one_mail.jpg)
 
 二. 时间窗口为10分钟,在连续的两分钟内如果服务请求的成功率低于%90触发警报
 
@@ -65,10 +65,10 @@ http://127.0.0.1:8099/simulate/error
     message: Successful rate of service {name} is lower than 90% in 2 minutes of last 10 minutes
 ```
 页面告警
-![服务告警页面图片](doc/sql/image/alarm_sla_page.jpg)
+![服务告警页面图片](doc/image/alarm_sla_page.jpg)
 
 邮箱告警
-![服务告警邮箱图片](doc/sql/image/alarm_sla_mail.jpg)
+![服务告警邮箱图片](doc/image/alarm_sla_mail.jpg)
 
 三. 时间窗口为5分钟,在连续的两分钟内如果服务实例平均请求响应大于1秒告警
 那个实例出问题)
@@ -86,10 +86,10 @@ http://127.0.0.1:8099/simulate/readTimeout
     message: Response time of service instance {name} is more than 1000ms in 2 minutes of last 5 minutes
 ```
 页面告警
-![服务告警页面图片](doc/sql/image/service_instance_resp_time_page.jpg)
+![服务告警页面图片](doc/image/service_instance_resp_time_page.jpg)
 
 邮箱告警
-![服务告警邮箱图片](doc/sql/image/service_instance_resp_time_mail.jpg)
+![服务告警邮箱图片](doc/image/service_instance_resp_time_mail.jpg)
 四. 时间窗口为5分钟,在连续的两分钟内如果端点平均请求响应大于1秒告警
 那个实例出问题)
 
@@ -106,11 +106,11 @@ http://127.0.0.1:8099/simulate/readTimeoutv1
     message: Response time of endpoint {name} is more than 1000ms in 2 minutes of last 5 minutes
 ```
 页面告警
-![服务告警页面图片](doc/sql/image/endpoint_avg_page.jpg)
+![服务告警页面图片](doc/image/endpoint_avg_page.jpg)
 
 邮箱告警
-![服务告警邮箱图片](doc/sql/image/endpoint_avg_mail_1.jpg)
-![服务告警邮箱图片](doc/sql/image/endpoint_avg_mail_2.jpg)
+![服务告警邮箱图片](doc/image/endpoint_avg_mail_1.jpg)
+![服务告警邮箱图片](doc/image/endpoint_avg_mail_2.jpg)
 
 
 
