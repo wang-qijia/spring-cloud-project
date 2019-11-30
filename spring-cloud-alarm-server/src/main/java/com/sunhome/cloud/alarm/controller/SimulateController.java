@@ -1,6 +1,5 @@
 package com.sunhome.cloud.alarm.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.sunhome.cloud.alarm.entiy.User;
 import com.sunhome.cloud.alarm.service.simulat.SimulateService;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
@@ -58,12 +56,9 @@ public class SimulateController {
         int num = 1 / 0;
     }
 
-
     @GetMapping("/query")
-    public String query() {
-        List<User> query = simulateService.query();
-        System.out.println(JSON.toJSONString(query));
-        return TraceContext.traceId();
+    public User query() {
+        return simulateService.query();
     }
 
 

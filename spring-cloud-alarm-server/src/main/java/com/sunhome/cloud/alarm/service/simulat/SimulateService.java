@@ -1,7 +1,9 @@
 package com.sunhome.cloud.alarm.service.simulat;
 
 import com.sunhome.cloud.alarm.entiy.User;
+import org.apache.skywalking.apm.toolkit.trace.ActiveSpan;
 import org.apache.skywalking.apm.toolkit.trace.Trace;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,12 +25,13 @@ public class SimulateService {
 
     /**
      * 此方法加到调用链中
+     *
      * @return
      */
     @Trace(operationName = "queryUser")
-    public List<User> query() {
+    public User query() {
         String sql = "select id,name from user limit 1";
-        List<User> users = jdbcTemplate.query(sql, new RowMapper<User>() {
+        User user = jdbcTemplate.queryForObject(sql, new RowMapper<User>() {
             @Override
             public User mapRow(ResultSet resultSet, int i) throws SQLException {
                 User user = new User();
@@ -37,6 +40,6 @@ public class SimulateService {
                 return user;
             }
         });
-        return users;
+        return user;
     }
 }
