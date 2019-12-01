@@ -13,4 +13,4 @@
 
 
 ## 搭建模型
-![spring_cloud模型](image/spring_cloud.jpg)
+![spring_cloud模型](doce/image/spring_cloud.jpg)

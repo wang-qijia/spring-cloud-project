@@ -3,7 +3,8 @@
 ## 无侵入调用链埋点框架
 
 ## Download...
-先跑起来,后了解原理，然后业务上不满足时在进行插件开发
+先跑起来,后了解原理，然后业务上不满足时在进行插件开发[http://skywalking.apache.org/downloads/]
+
 
 ## 辅助工具
 postman串行设置请求数,达到模拟效果(工具随便选择)
@@ -16,9 +17,13 @@ postman串行设置请求数,达到模拟效果(工具随便选择)
 * 指定配置文件路径，项目和配置文件一对一
     1. -Dskywalking_config=/path/to/agent.config
     2. -Dskywalking_config=D:\agent.config
+* 可选插件
+    1. apm-trace-ignore-plugin->排除不需要监控路径,比如eureka客户端心跳等等
+    2. 其他可选插件参考官方文档
 * 注意事项
     1. 多个项目共用一个agent时,日志文件路径[logging.dir]要区分,便于排除问题
     2. 项目和agent为1对1时,请注意agent命名空间[agent.namespace],当双方使用不同的名称空间时，跨进程传播链中断。
+    3. docker环境采用数据卷[VOLUME]方式docker run -v 主机路径:容器路径(不建议每个应用都把agent打在镜像去启动,这样的话感觉资源有些浪费)
 
 ## 回调地址
     webhooks:
@@ -130,6 +135,16 @@ http://127.0.0.1:8099/simulate/readTimeoutv1
    
     社区中文文档
     https://skyapm.github.io/document-cn-translation-of-skywalking/
+    
+    官方演示地址
+    [演示地址](http://122.112.182.72:8080/)
+    官方演示demo
+    [github_spring-cloud-example](https://github.com/SkyAPMTest/spring-cloud-example)
+    
+    
+    [告警文章](https://blog.csdn.net/zhllansezhilian/article/details/88304332)
+    
+
     
 
 

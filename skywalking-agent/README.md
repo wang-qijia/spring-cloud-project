@@ -1,13 +1,4 @@
-# Spring Cloud Skywalking
-
-## 分布式调用链跟踪工具
-
-# 下载地址
-http://skywalking.apache.org/downloads/
-
-## 客户端接入方式
-* 代理程序agent放入易于管理的位置
-* 将-javaagent：/path/to/skywalking-agent/skywalking-agent.jar添加到VM参数
+# Spring Cloud Skywalking 源码分析
 
 [agent-config](https://github.com/apache/skywalking/blob/master/docs/en/setup/service-agent/java-agent/README.md#table-of-agent-configuration-properties)
 ## 告警原理
@@ -112,14 +103,6 @@ org.apache.skywalking.oap.server.core.alarm.provider.RunningRule
                     return matchCount >= countThreshold;
                 }
 ```
-
-## 参考官方demo
-[演示地址](http://122.112.182.72:8080/)
-
-[github_spring-cloud-example](https://github.com/SkyAPMTest/spring-cloud-example)
-
-可参考
-[告警文章](https://blog.csdn.net/zhllansezhilian/article/details/88304332)
 
 
 
