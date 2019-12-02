@@ -19,6 +19,7 @@
         <module>spring-cloud-admin-server</module>
         <module>spring-cloud-auth-server</module>
         <module>spring-cloud-alarm-server</module>
+        <module>spring-cloud-sw-plugin</module>
     </modules>
 
     <properties>
