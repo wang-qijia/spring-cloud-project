@@ -144,6 +144,9 @@ http://127.0.0.1:8099/simulate/readTimeoutv1
     
     [告警文章](https://blog.csdn.net/zhllansezhilian/article/details/88304332)
     
+    ui展示參數介紹
+    https://www.wandouip.com/t5i329072/
+    
 
     
 
