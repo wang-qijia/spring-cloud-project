@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @Api(tags = "EsUserController", description = "用户管理")
-@RequestMapping("/esProduct")
+@RequestMapping("/esUser")
 public class EsUserController {
 
     @Autowired

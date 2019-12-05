@@ -5,13 +5,16 @@ spring:
     password: wang521 # 邮箱配置个人的
   datasource: # 数据源配置
     username: root
-    password:
-    url: jdbc:mysql://localhost:3306/admin?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    password: 123456
+    url: jdbc:mysql://localhost:3306/skywalking?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.jdbc.Driver
   data: # es配置
     elasticsearch:
       cluster-name: local-es
       cluster-nodes: 127.0.0.1:9300
+      repositories:
+        enabled: true
+
 
 # 告警邮箱配置
 alarm:
@@ -19,16 +22,6 @@ alarm:
     from: m15201373116@163.com
     to: m15201373116@163.com
     subject: 服务告警
-
-configuration:
-  none:
-    apollo:
-      apolloMeta: http://apollo.meta.d.xiaonei.com:9089
-      apolloCluster: default
-      # apolloEnv: # defaults to null
-      appId: skywalking-oap
-      period: 5
-
 
 
 

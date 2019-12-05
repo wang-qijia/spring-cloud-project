@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -62,10 +63,15 @@ public class SimulateController {
         return simulateService.query();
     }
 
-    @GetMapping("/get")
-    public String get() throws InterruptedException {
-        Thread.sleep(2 * 1000);
-        return "getInfo";
+    /**
+     * 模拟url路径变化sw是否都拦截
+     * @param name
+     * @return
+     * @throws InterruptedException
+     */
+    @GetMapping("/get/{name}")
+    public String get(@PathVariable("name") String name) throws InterruptedException {
+        return name;
     }
 
 
