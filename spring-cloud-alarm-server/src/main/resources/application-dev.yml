@@ -11,7 +11,7 @@ spring:
   data: # es配置
     elasticsearch:
       cluster-name: local-es
-      cluster-nodes: 127.0.0.1:9200
+      cluster-nodes: 127.0.0.1:9300
 
 # 告警邮箱配置
 alarm:
@@ -19,6 +19,15 @@ alarm:
     from: m15201373116@163.com
     to: m15201373116@163.com
     subject: 服务告警
+
+configuration:
+  none:
+    apollo:
+      apolloMeta: http://apollo.meta.d.xiaonei.com:9089
+      apolloCluster: default
+      # apolloEnv: # defaults to null
+      appId: skywalking-oap
+      period: 5
 
 
 

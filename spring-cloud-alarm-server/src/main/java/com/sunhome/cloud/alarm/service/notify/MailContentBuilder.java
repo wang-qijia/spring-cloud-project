@@ -1,12 +1,10 @@
 package com.sunhome.cloud.alarm.service.notify;
 
-import com.sunhome.cloud.alarm.entiy.AlarmMessageDTO;
+import com.sunhome.cloud.alarm.entiy.AlarmMessageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-import org.thymeleaf.context.IContext;
 
 import java.util.List;
 
@@ -20,7 +18,7 @@ public class MailContentBuilder {
     private TemplateEngine templateEngine;
 
 
-    public String build(List<AlarmMessageDTO> alarmMessageList) {
+    public String build(List<AlarmMessageVO> alarmMessageList) {
         Context context = new Context();
         context.setVariable("alarmList", alarmMessageList);
         return templateEngine.process("alarmNotify", context);

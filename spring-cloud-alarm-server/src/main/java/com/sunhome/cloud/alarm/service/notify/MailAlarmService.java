@@ -3,7 +3,7 @@ package com.sunhome.cloud.alarm.service.notify;
 import com.alibaba.fastjson.JSON;
 import com.sunhome.cloud.alarm.config.AlarmProperties;
 import com.sunhome.cloud.alarm.entiy.AlarmMessage;
-import com.sunhome.cloud.alarm.entiy.AlarmMessageDTO;
+import com.sunhome.cloud.alarm.entiy.AlarmMessageVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -37,7 +37,7 @@ public class MailAlarmService implements AlarmService {
         System.out.println("mail send:" + JSON.toJSONString(alarmMessages));
 
         StringBuilder sb = new StringBuilder();
-        List<AlarmMessageDTO> alarmMessageList = new ArrayList<>();
+        List<AlarmMessageVO> alarmMessageList = new ArrayList<>();
 
         for (AlarmMessage alarmMessage : alarmMessages) {
 //            toMessageStr(sb, alarmMessage);
@@ -61,10 +61,10 @@ public class MailAlarmService implements AlarmService {
 
     }
 
-    private void toMessageDTO(List<AlarmMessageDTO> alarmMessageList, AlarmMessage alarmMessage) {
+    private void toMessageDTO(List<AlarmMessageVO> alarmMessageList, AlarmMessage alarmMessage) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-        AlarmMessageDTO alarmMessageDTO = new AlarmMessageDTO();
+        AlarmMessageVO alarmMessageDTO = new AlarmMessageVO();
         alarmMessageDTO.setAlarmMessage(Rule.get(alarmMessage.getRuleName(), alarmMessage.getAlarmMessage()));
         alarmMessageDTO.setName(alarmMessage.getName());
         alarmMessageDTO.setRuleName(alarmMessage.getRuleName());

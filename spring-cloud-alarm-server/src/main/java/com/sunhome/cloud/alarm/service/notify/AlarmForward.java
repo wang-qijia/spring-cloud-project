@@ -1,4 +1,4 @@
-package com.sunhome.cloud.alarm.service;
+package com.sunhome.cloud.alarm.service.notify;
 
 import com.sunhome.cloud.alarm.entiy.AlarmMessage;
 import com.sunhome.cloud.alarm.event.AlarmEvent;
@@ -17,7 +17,7 @@ import java.util.Map;
  * 业务实现与消息解析隔离
  * 后续其他扩展继承AlarmService
  */
-@Component
+@Component("alarm")
 public class AlarmForward implements ApplicationListener<AlarmEvent>, ApplicationContextAware {
 
     Map<String, AlarmService> candidates;

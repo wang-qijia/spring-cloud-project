@@ -1,5 +1,6 @@
 package com.sunhome.cloud.alarm.service.simulat;
 
+import com.sunhome.cloud.alarm.dao.UserDao;
 import com.sunhome.cloud.alarm.entiy.User;
 import org.apache.skywalking.apm.toolkit.trace.ActiveSpan;
 import org.apache.skywalking.apm.toolkit.trace.Trace;
@@ -21,7 +22,7 @@ import java.util.List;
 public class SimulateService {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private UserDao userDao;
 
     /**
      * 此方法加到调用链中
@@ -29,17 +30,8 @@ public class SimulateService {
      * @return
      */
     @Trace(operationName = "queryUser")
-    public User query() {
-        String sql = "select id,name from user limit 1";
-        User user = jdbcTemplate.queryForObject(sql, new RowMapper<User>() {
-            @Override
-            public User mapRow(ResultSet resultSet, int i) throws SQLException {
-                User user = new User();
-                user.setId(resultSet.getInt(1));
-                user.setName(resultSet.getString(2));
-                return user;
-            }
-        });
-        return user;
+    public List<User> query() {
+
+        return userDao.getAll();
     }
 }

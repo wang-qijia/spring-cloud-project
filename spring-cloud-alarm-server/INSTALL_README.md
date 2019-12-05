@@ -8,8 +8,6 @@
     1. 首次运行sw对接es存储时,会创建索引,持续时间1-2分钟。
 
 
-
-
 参考文档
 https://github.com/apache/skywalking/blob/master/docs/en/setup/backend/backend-storage.md
 

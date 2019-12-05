@@ -23,7 +23,7 @@ package com.sunhome.cloud.alarm.entiy;
  * https://github.com/apache/skywalking/blob/master/docs/en/setup/backend/backend-alarm.md#rules
  * 源码见RunningRule->142行
  */
-public class AlarmMessageDTO {
+public class AlarmMessageVO {
 
     /**
      * 范围名称->作用域

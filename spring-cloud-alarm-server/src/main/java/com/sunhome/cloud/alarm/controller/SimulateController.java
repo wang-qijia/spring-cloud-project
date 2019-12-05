@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeoutException;
 
@@ -57,8 +58,14 @@ public class SimulateController {
     }
 
     @GetMapping("/query")
-    public User query() {
+    public List<User> query() {
         return simulateService.query();
+    }
+
+    @GetMapping("/get")
+    public String get() throws InterruptedException {
+        Thread.sleep(2 * 1000);
+        return "getInfo";
     }
 
 

@@ -22,7 +22,4 @@ public class AlarmEvent extends ApplicationEvent {
         return alarmMessages;
     }
 
-    public void setAlarmMessages(List<AlarmMessage> alarmMessages) {
-        this.alarmMessages = alarmMessages;
-    }
 }
