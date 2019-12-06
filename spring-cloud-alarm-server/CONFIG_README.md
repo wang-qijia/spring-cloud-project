@@ -11,10 +11,14 @@
           apolloCluster: default
           apolloEnv: dev
           appId: skywalking-oap
-          period: 5
+          period: 5 #时间间隔
 ```
+直接把alarm-settings.yml内容复制到value属性上
+![配置指南](doc/image/oap_apollo_config.jpg)
 
 
 参考文档
+源码见 [AlarmRulesWatcher]
+
 https://github.com/apache/skywalking/blob/master/docs/en/setup/backend/dynamic-config.md
 

@@ -20,17 +20,51 @@ alarm:
     to: m15201373116@163.com
     subject: 服务告警
 
-configuration:
-  none:
-    apollo:
-      apolloMeta: http://apollo.meta.d.xiaonei.com:9089
-      apolloCluster: default
-      # apolloEnv: # defaults to null
-      appId: skywalking-oap
-      period: 5
+rules:
+  # Rule unique name, must be ended with `_rule`.
+  service_resp_time_rule:
+    metrics-name: service_resp_time
+    op: ">"
+    threshold: 2000
+    period: 5
+    count: 2
+    silence-period: 0
+    message: The average service response event in the last 2 minutes is greater than 2 seconds
+  service_sla_rule:
+    # Metrics value need to be long, double or int
+    metrics-name: service_sla
+    op: "<"
+    threshold: 9000
+    # The length of time to evaluate the metrics
+    period: 10
+    # How many times after the metrics match the condition, will trigger alarm
+    count: 2
+    # How many times of checks, the alarm keeps silence after alarm triggered, default as same as period.
+    silence-period: 0
+    message: Successful rate of service {name} is lower than 90% in 2 minutes of last 10 minutes
+  service_instance_resp_time_rule:
+    metrics-name: service_instance_resp_time
+    op: ">"
+    threshold: 1000
+    period: 5
+    count: 2
+    silence-period: 0
+    message: Response time of service instance {name} is more than 1000ms in 2 minutes of last 5 minutes
+  #  Active endpoint related metrics alarm will cost more memory than service and service instance metrics alarm.
+  #  Because the number of endpoint is much more than service and instance.
+  #
+  endpoint_avg_rule:
+    metrics-name: endpoint_avg
+    op: ">"
+    threshold: 1000
+    period: 5
+    count: 2
+    silence-period: 5
+    message: Response time of endpoint {name} is more than 1000ms in 2 minutes of last 5 minutes
 
-
-
+  webhooks:
+    - http://127.0.0.1:8099/alarm/notify
+  #  - http://127.0.0.1/go-wechat/
 
 
 
