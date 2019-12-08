@@ -13,6 +13,6 @@
 
 * spring-cloud-project
     * spring-cloud-alarm-server skwalking 告警服务(提供文档)
-    * spring-cloud-se-plugin 二次开发插件模块(目前尚无)
+    * spring-cloud-sw-plugin 二次开发插件模块(目前尚无)
 
 ## 搭建模型

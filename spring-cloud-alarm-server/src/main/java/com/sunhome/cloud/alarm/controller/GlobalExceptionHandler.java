@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public JSONObject defaultErrorHandler(HttpServletRequest request, Exception e) {
         logger.error("request url:[{}],error desc:[{}] ", request.getRequestURL().toString(), e.getMessage() == null ? "服务器异常" : e.getMessage());
-        ActiveSpan.tag("result", "100");
+        ActiveSpan.error();
 
         JSONObject result = new JSONObject();
         result.put("result", 100);

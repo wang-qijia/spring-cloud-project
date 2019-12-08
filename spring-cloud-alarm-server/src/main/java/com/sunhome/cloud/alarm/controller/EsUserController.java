@@ -5,6 +5,8 @@ import com.sunhome.cloud.alarm.service.search.EsUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +19,7 @@ import java.util.List;
  * @author wangqijia
  * @date 2019/12/5 14:38
  */
+@ConditionalOnBean(ElasticsearchAutoConfiguration.class)
 @RestController
 @Api(tags = "EsUserController", description = "用户管理")
 @RequestMapping("/esProduct")

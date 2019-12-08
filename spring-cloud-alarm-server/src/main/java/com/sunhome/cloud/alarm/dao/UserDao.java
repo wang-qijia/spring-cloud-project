@@ -2,6 +2,7 @@ package com.sunhome.cloud.alarm.dao;
 
 import com.sunhome.cloud.alarm.entiy.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

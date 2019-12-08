@@ -4,6 +4,9 @@ import com.sunhome.cloud.alarm.dao.UserDao;
 import com.sunhome.cloud.alarm.entiy.User;
 import com.sunhome.cloud.alarm.repository.EsUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

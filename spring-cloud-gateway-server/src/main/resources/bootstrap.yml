@@ -40,6 +40,11 @@ spring:
                   - SERVER_ERROR
                 exceptions:
                   - org.springframework.cloud.gateway.support.TimeoutException # 超时时重试
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 2
+                key-resolver: "#{@ipKeyResolver}"
 
 
 
@@ -87,6 +92,9 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+  redis:
+    host: 127.0.0.1
+    port: 6379
 eureka:
   client:
     registry-fetch-interval-seconds: 10

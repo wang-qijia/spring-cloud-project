@@ -13,10 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 业务实现与消息解析隔离
- * 后续其他扩展继承AlarmService
- */
+
 @Component("alarm")
 public class AlarmForward implements ApplicationListener<AlarmEvent>, ApplicationContextAware {
 
