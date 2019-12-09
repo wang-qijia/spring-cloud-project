@@ -20,6 +20,7 @@
         <module>spring-cloud-auth-server</module>
         <module>spring-cloud-alarm-server</module>
         <module>spring-cloud-sw-plugin</module>
+        <module>spring-cloud-doctor</module>
     </modules>
 
     <properties>

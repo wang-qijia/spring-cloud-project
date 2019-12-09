@@ -19,12 +19,11 @@ public class GlobalExceptionHandler {
 
     private static Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @Trace
+
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public JSONObject defaultErrorHandler(HttpServletRequest request, Exception e) {
         logger.error("request url:[{}],error desc:[{}] ", request.getRequestURL().toString(), e.getMessage() == null ? "服务器异常" : e.getMessage());
-        ActiveSpan.error();
 
         JSONObject result = new JSONObject();
         result.put("result", 100);

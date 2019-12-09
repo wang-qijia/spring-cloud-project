@@ -1,6 +1,7 @@
 package com.sunhome.cloud.alarm.controller;
 
 import com.sunhome.cloud.alarm.entiy.User;
+import com.sunhome.cloud.alarm.exception.ServiceException;
 import com.sunhome.cloud.alarm.service.simulat.SimulateService;
 import org.apache.skywalking.apm.toolkit.trace.TraceContext;
 import org.slf4j.Logger;
@@ -54,8 +55,10 @@ public class SimulateController {
     }
 
     @GetMapping("/error")
-    public void error() {
-        int num = 1 / 0;
+    public void error() throws ServiceException {
+        if (true) {
+            throw new ServiceException("error exception");
+        }
     }
 
     @GetMapping("/query")

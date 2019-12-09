@@ -32,7 +32,7 @@ spring:
             - Path=/spring-cloud-client-server/**
           filters:
             - StripPrefix=1
-            - Print=success
+            #- Print=success
             - name: Retry
               args:
                 retries: 3
