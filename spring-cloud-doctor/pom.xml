@@ -12,6 +12,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-cloud-doctor-sentinel</module>
+        <module>spring-cloud-hystrix-dashboard</module>
+        <module>spring-cloud-turbine-server</module>
     </modules>
     <artifactId>spring-cloud-doctor</artifactId>
 

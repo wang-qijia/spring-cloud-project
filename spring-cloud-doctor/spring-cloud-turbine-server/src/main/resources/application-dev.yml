@@ -1,0 +1,11 @@
+spring:
+  profiles: dev
+eureka:
+  client:
+    registry-fetch-interval-seconds: 10
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8089/eureka/
+turbine:
+  app-config: spring-cloud-client-server
+  cluster-name-expression: new String('default')
+  combine-host-port: true
