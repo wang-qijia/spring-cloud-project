@@ -21,6 +21,7 @@
         <module>spring-cloud-alarm-server</module>
         <module>spring-cloud-sw-plugin</module>
         <module>spring-cloud-doctor</module>
+        <module>spring-cloud-stream</module>
     </modules>
 
     <properties>
