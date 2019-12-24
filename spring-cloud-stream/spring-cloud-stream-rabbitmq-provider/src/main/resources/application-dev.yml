@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    stream:
+      binders:
+        default-mq:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                addresses: 10.4.82.62
+                port: 5672
+                username: roberto
+                password: roberto
+                virtual-host: /qijia.wang
+      bindings:
+        myOutPut:
+          destination: spring.cloud.stream.test.direct
+          content-type: application/json
+      rabbit:
+        bindings:
+          myOutPut:
+            producer:
+              exchangeType: direct
+              routingKeyExpression: '''cloud.stream.send'''
+
+

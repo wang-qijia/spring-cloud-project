@@ -13,6 +13,7 @@ import java.util.Map;
  * @date 2019/12/11 14:19
  */
 public class JwtTokenEnhancer implements TokenEnhancer {
+
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         Map<String, Object> info = new HashMap<>();

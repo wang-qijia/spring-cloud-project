@@ -39,8 +39,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     @Qualifier("jwtTokenStore")
     private TokenStore tokenStore;
+
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
+
     @Autowired
     private JwtTokenEnhancer jwtTokenEnhancer;
 
